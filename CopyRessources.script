@@ -1,0 +1,4 @@
+cp -R Data bin/Release;
+cp -R Data bin/Release64;
+cp -R Data bin/Debug;
+cp -R Data bin/Debug64;
