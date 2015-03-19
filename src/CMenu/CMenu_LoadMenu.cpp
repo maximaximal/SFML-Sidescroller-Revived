@@ -112,10 +112,8 @@ void CMenu::loadMenu(int ID)
         Score.setCharacterSize(40);
         this->Labels.push_back(Score);
         updateTextures = true;
-        sf::Text Scores("Loading...");
+        sf::Text Scores("Loading...", CFontManager::Get()->getFont("Monospace"), 16);
         CWebManager::Get()->web_getScores();
-        Scores.setFont(CFontManager::Get()->getFont("Monospace"));
-        Scores.setCharacterSize(16);
         Scores.setPosition(50, 350);
         Labels.push_back(Scores);
         sf::Text name;
@@ -222,10 +220,8 @@ void CMenu::loadMenu(int ID)
         Exit.sprite.setPosition(CConfig::Get()->getWindowX() - 200, CConfig::Get()->getWindowY() - 50);
         Buttons.push_back(Exit);
         updateTextures = true;
-        sf::Text Scores("Loading...");
+        sf::Text Scores("Loading...", CFontManager::Get()->getFont("Monospace"), 16);
         CWebManager::Get()->web_getScores();
-        Scores.setFont(CFontManager::Get()->getFont("Monospace"));
-        Scores.setCharacterSize(16);
         Scores.setPosition(50, 50);
         Labels.push_back(Scores);
     }

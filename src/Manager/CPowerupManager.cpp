@@ -6,7 +6,10 @@
 #include <CScorePopup.h>
 #include <CConfig.h>
 #include <CSoundEffect.h>
+#include <PhysicsDefinitions.hpp>
+
 using namespace std;
+
 CPowerupManager::CPowerupManager()
 {
     CTextureManager::Get()->createTexture("Data/Textures/Powerups.png", "PowerupSheet");

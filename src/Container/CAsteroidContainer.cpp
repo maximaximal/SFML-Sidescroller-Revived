@@ -10,6 +10,8 @@
 #include <CScorePopup.h>
 #include <Manager/CPowerupManager.h>
 #include <Explosions/CExplosionManager.h>
+#include <PhysicsDefinitions.hpp>
+
 CAsteroidContainer::CAsteroidContainer()
 {
     CTextureManager::Get()->createTexture("Data/Textures/MeteorSheet1.png", "MeteorSheet");
@@ -87,11 +89,11 @@ void CAsteroidContainer::update(float frametime)
         }
         if(Asteroids[i].body->GetWorldCenter().y < 0)
         {
-            Asteroids[i].body->ApplyForceToCenter(b2Vec2(frametime * -50.f, frametime * 70.f));
+            Asteroids[i].body->ApplyForceToCenter(b2Vec2(frametime * -50.f, frametime * 70.f), true);
         }
         if(Asteroids[i].body->GetWorldCenter().y > CConfig::Get()->getWindowY() * PIXELSTOMETERS)
         {
-            Asteroids[i].body->ApplyForceToCenter(b2Vec2(frametime * -50.f, frametime * -70.f));
+            Asteroids[i].body->ApplyForceToCenter(b2Vec2(frametime * -50.f, frametime * -70.f), true);
         }
         CPhysicsManager::Get()->WorldMutex.unlock();
     }
@@ -193,7 +195,7 @@ void CAsteroidContainer::spawnAsteroid(int i)
     std::unique_ptr<b2FixtureDef> Fixture = CPhysicsManager::Get()->getFixtureFromScript(fixtureName.str());
     Asteroid.body->CreateFixture(Fixture.get());
     Fixture.release();
-    Asteroid.body->ApplyLinearImpulse(b2Vec2(rand()%1500 - 1500 - (CConfig::Get()->getGameLevel() + 1) * 100, (rand()%800 - 400)), Asteroid.body->GetWorldCenter());
+    Asteroid.body->ApplyLinearImpulse(b2Vec2(rand()%1500 - 1500 - (CConfig::Get()->getGameLevel() + 1) * 100, (rand()%800 - 400)), Asteroid.body->GetWorldCenter(), true);
     Asteroid.body->SetAngularVelocity((rand()%400 - 200) *0.01);
     Asteroid.ID = new PhysID();
     Asteroid.ID->type = PhysID_TYPE_ASTEROID;

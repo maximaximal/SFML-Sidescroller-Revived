@@ -4,7 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <CConfig.h>
 
 Entity::Entity()

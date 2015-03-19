@@ -342,7 +342,7 @@ void CMenu::handleKeyInput(sf::Keyboard::Key Key, bool Shift)
         if(Key == sf::Keyboard::Num9)
             this->nickname.append("9");
     }
-    if(Key == sf::Keyboard::BackSlash || Key == sf::Keyboard::Back)
+    if(Key == sf::Keyboard::BackSlash || Key == sf::Keyboard::BackSpace)
     {
         if(nickname != "")
             this->nickname.erase(nickname.size() - 1, nickname.size());

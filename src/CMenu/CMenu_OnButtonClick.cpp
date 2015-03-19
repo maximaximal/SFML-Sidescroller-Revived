@@ -48,10 +48,8 @@ void CMenu::OnButtonClick_StartUpdate()
     HowToStr << "      select \"extract here\"" << endl;
     HowToStr << "   4. Delete the downloaded file." << endl;
     HowToStr << "   5. Play the game!" << endl;
-    sf::Text HowTo(HowToStr.str());
-    HowTo.setFont(CFontManager::Get()->getFont("Monospace"));
+    sf::Text HowTo(HowToStr.str(), CFontManager::Get()->getFont("Monospace"), 16);
     HowTo.setPosition(20, 150);
-    HowTo.setCharacterSize(16);
     this->Labels.push_back(HowTo);
 }
 void CMenu::OnButtonClick_OpenScoreList()

@@ -3,7 +3,7 @@
 
 #include <CSingleton.h>
 
-class CEntityManager : public CSingleton;
+class CEntityManager : public TSingleton<CEntityManager>
 {
     public:
         CEntityManager();

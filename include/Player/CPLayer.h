@@ -2,7 +2,7 @@
 #define CPLAYER_H
 
 #include <Entity.h>
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <Manager/CPhysicsManager.h>
 #include <Container/CBulletContainer.h>
 

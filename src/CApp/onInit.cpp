@@ -73,14 +73,10 @@ void CApp::onInit()
 //Initialize the FPS-Text
     this->FPSCounter = 0;
     this->FPSCache = 0;
-    this->T_DebugText = new sf::Text("Loading debug...");
-    this->T_DebugText->setFont(CFontManager::Get()->getFont("Beeb Mode One"));
-    this->T_DebugText->setCharacterSize(12);
+    this->T_DebugText = new sf::Text("Loading debug...", CFontManager::Get()->getFont("Beeb Mode One"), 12);
     this->T_DebugText->move(10, 10);
-    this->T_Score = new sf::Text("Your Score: ");
-    this->T_Score->setFont(CFontManager::Get()->getFont("Computerfont"));
+    this->T_Score = new sf::Text("Your Score: ", CFontManager::Get()->getFont("Computerfont"), 20);
     this->T_Score->setPosition(CConfig::Get()->getWindowX() - 200, CConfig::Get()->getWindowY() - 25);
-    this->T_Score->setCharacterSize(20);
 //Init the SoundEffects
     if(CConfig::Get()->getGameSounds())
     {

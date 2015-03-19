@@ -2,9 +2,11 @@
 #include <math.h>
 #include <Manager/CPhysicsManager.h>
 #include <Manager/CTextureManager.h>
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <iostream>
 #include <Manager/CPowerupManager.h>
+#include <PhysicsDefinitions.hpp>
+
 using namespace std;
 
 CBulletContainer::CBulletContainer()
@@ -22,7 +24,7 @@ CBulletContainer::CBulletContainer()
             vertices[0].Set(0, 1 * PIXELSTOMETERS);
             vertices[1].Set(1 * PIXELSTOMETERS, 0);
             vertices[2].Set(8 * PIXELSTOMETERS, 0);
-            vertices[3].Set(9 *PIXELSTOMETERS, 1 * PIXELSTOMETERS);
+            vertices[3].Set(9 * PIXELSTOMETERS, 1 * PIXELSTOMETERS);
             vertices[4].Set(9 * PIXELSTOMETERS, 4*PIXELSTOMETERS);
             vertices[5].Set(8 * PIXELSTOMETERS, 5 * PIXELSTOMETERS);
             vertices[6].Set(1 * PIXELSTOMETERS, 5 * PIXELSTOMETERS);
@@ -89,7 +91,7 @@ void CBulletContainer::createBullet(sf::Vector2f pos, sf::Vector2f force, int ty
         Bullet.body = CPhysicsManager::Get()->World->CreateBody(this->BulletBodyDef1);
         Bullet.body->CreateFixture(&BulletFixtureDef);
         Bullet.dead = false;
-        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition());
+        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition(), true);
         Bullet.sprite->setColor(sf::Color(255, 255, 255, 255));
         Bullet.sprite->setTexture(CTextureManager::Get()->getTexture("SpaceshipSheet"));
         Bullet.sprite->setTextureRect(sf::IntRect(5, 207, 10,5));
@@ -122,7 +124,7 @@ void CBulletContainer::createBullet(sf::Vector2f pos, sf::Vector2f force, int ty
         Bullet.body = CPhysicsManager::Get()->World->CreateBody(this->BulletBodyDef1);
         Bullet.body->CreateFixture(&BulletFixtureDef);
         Bullet.dead = false;
-        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition());
+        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition(), true);
         Bullet.sprite->setColor(sf::Color(255, 255, 255, 255));
         Bullet.sprite->setTexture(CTextureManager::Get()->getTexture("SpaceshipSheet"));
         Bullet.sprite->setTextureRect(sf::IntRect(5, 217, 15,15));
@@ -155,7 +157,7 @@ void CBulletContainer::createBullet(sf::Vector2f pos, sf::Vector2f force, int ty
         Bullet.body = CPhysicsManager::Get()->World->CreateBody(this->BulletBodyDef1);
         Bullet.body->CreateFixture(&BulletFixtureDef);
         Bullet.dead = false;
-        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition());
+        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition(), true);
         Bullet.sprite->setColor(sf::Color(255, 255, 255, 255));
         Bullet.sprite->setTexture(CTextureManager::Get()->getTexture("SpaceshipSheet"));
         Bullet.sprite->setTextureRect(sf::IntRect(5, 232, 3, 3));
@@ -188,7 +190,7 @@ void CBulletContainer::createBullet(sf::Vector2f pos, sf::Vector2f force, int ty
         Bullet.body = CPhysicsManager::Get()->World->CreateBody(this->BulletBodyDef1);
         Bullet.body->CreateFixture(&BulletFixtureDef);
         Bullet.dead = false;
-        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition());
+        Bullet.body->ApplyLinearImpulse(b2Vec2(force.x, force.y), Bullet.body->GetPosition(), true);
         Bullet.sprite->setColor(sf::Color(255, 255, 255, 255));
         Bullet.sprite->setTexture(CTextureManager::Get()->getTexture("SpaceshipSheet"));
         Bullet.sprite->setTextureRect(sf::IntRect(5, 235, 5,2));

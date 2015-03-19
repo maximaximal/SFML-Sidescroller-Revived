@@ -37,3 +37,9 @@ void CApp::takeScreenshot()
     cout << "Saved Screenshot!" << endl;
     CPhysicsManager::Get()->WorldMutex.unlock();
 }
+
+int main()
+{
+    CApp game;
+    game.onInit();
+}

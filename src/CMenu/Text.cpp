@@ -171,7 +171,7 @@ void Text::handleEvent(sf::Event *event)
             if(Key == sf::Keyboard::Num2)
                 name << "2";
             if(Key == sf::Keyboard::Num3)
-                name << "Â";
+                name << "ï¿½";
             if(Key == sf::Keyboard::Num4)
                 name << "$";
             if(Key == sf::Keyboard::Num5)
@@ -260,7 +260,7 @@ void Text::handleEvent(sf::Event *event)
             if(Key == sf::Keyboard::Num9)
                 name << "9";
         }
-        if(Key == sf::Keyboard::Back && name.str().size() > 0)
+        if(Key == sf::Keyboard::BackSpace && name.str().size() > 0)
             this->text->setString(name.str().erase(name.str().size() - 1, name.str().size()));
         else
             this->text->setString(name.str());

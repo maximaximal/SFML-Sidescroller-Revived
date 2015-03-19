@@ -4,10 +4,12 @@
 #include <Manager/CPhysicsManager.h>
 #include <Container/CBulletContainer.h>
 #include <CConfig.h>
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <iostream>
 #include <CSoundEffect.h>
 #include <Manager/CPowerupManager.h>
+#include <PhysicsDefinitions.hpp>
+
 CPlayer::CPlayer()
 {
     this->shield = false;
@@ -236,13 +238,13 @@ void CPlayer::update(float frametime)
     if(this->PlayerBody->GetWorldCenter().y < 0)
     {
         CPhysicsManager::Get()->WorldMutex.lock();
-        this->PlayerBody->ApplyForceToCenter(b2Vec2(0, frametime * 80.f));
+        this->PlayerBody->ApplyForceToCenter(b2Vec2(0, frametime * 80.f), true);
         CPhysicsManager::Get()->WorldMutex.unlock();
     }
     if(this->PlayerBody->GetWorldCenter().y > CConfig::Get()->getWindowY() * PIXELSTOMETERS)
     {
         CPhysicsManager::Get()->WorldMutex.lock();
-        this->PlayerBody->ApplyForceToCenter(b2Vec2(-500, frametime * -80.f));
+        this->PlayerBody->ApplyForceToCenter(b2Vec2(-500, frametime * -80.f), true);
         CPhysicsManager::Get()->WorldMutex.unlock();
     }
 }
@@ -256,16 +258,16 @@ void CPlayer::move(int Direction, int force, int type)
         switch (Direction)
         {
             case 0:
-                this->PlayerBody->ApplyForce(b2Vec2(force, 0), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(force, 0), PlayerBody->GetWorldCenter(), true);
                 break;
             case 1:
-                this->PlayerBody->ApplyForce(b2Vec2(0, force), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(0, force), PlayerBody->GetWorldCenter(), true);
                 break;
             case 2:
-                this->PlayerBody->ApplyForce(b2Vec2(-force, 0), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(-force, 0), PlayerBody->GetWorldCenter(), true);
                 break;
             case 3:
-                this->PlayerBody->ApplyForce(b2Vec2(0, -force), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(0, -force), PlayerBody->GetWorldCenter(), true);
                 break;
         }
         CPhysicsManager::Get()->WorldMutex.unlock();
@@ -276,16 +278,16 @@ void CPlayer::move(int Direction, int force, int type)
         switch (Direction)
         {
             case 0:
-                this->PlayerBody->ApplyForce(b2Vec2(force, 0), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(force, 0), PlayerBody->GetWorldCenter(), true);
                 break;
             case 1:
-                this->PlayerBody->ApplyForce(b2Vec2(0, force), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(0, force), PlayerBody->GetWorldCenter(), true);
                 break;
             case 2:
-                this->PlayerBody->ApplyForce(b2Vec2(-force, 0), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(-force, 0), PlayerBody->GetWorldCenter(), true);
                 break;
             case 3:
-                this->PlayerBody->ApplyForce(b2Vec2(0, -force), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyForce(b2Vec2(0, -force), PlayerBody->GetWorldCenter(), true);
                 break;
         }
         CPhysicsManager::Get()->WorldMutex.unlock();
@@ -299,16 +301,16 @@ void CPlayer::quickMove(int Direction)
         switch (Direction)
         {
             case 0:
-                this->PlayerBody->ApplyLinearImpulse(b2Vec2(2000, 0), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyLinearImpulse(b2Vec2(2000, 0), PlayerBody->GetWorldCenter(), true);
                 break;
             case 1:
-                this->PlayerBody->ApplyLinearImpulse(b2Vec2(0, 2000), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyLinearImpulse(b2Vec2(0, 2000), PlayerBody->GetWorldCenter(), true);
                 break;
             case 2:
-                this->PlayerBody->ApplyLinearImpulse(b2Vec2(-2000, 0), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyLinearImpulse(b2Vec2(-2000, 0), PlayerBody->GetWorldCenter(), true);
                 break;
             case 3:
-                this->PlayerBody->ApplyLinearImpulse(b2Vec2(0, -2000), PlayerBody->GetWorldCenter());
+                this->PlayerBody->ApplyLinearImpulse(b2Vec2(0, -2000), PlayerBody->GetWorldCenter(), true);
                 break;
         }
         this->fuel -= 200;

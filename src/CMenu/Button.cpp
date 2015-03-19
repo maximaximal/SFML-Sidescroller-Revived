@@ -13,9 +13,7 @@ Button::Button(sf::Vector2i pos, std::string text)
     CTextureManager::Get()->createTexture("Data/Textures/Gui.png", "GuiSheet");
     this->sprite = new sf::Sprite(CTextureManager::Get()->getTexture("GuiSheet"), sf::IntRect(0, 0, 150, 25));
     this->sprite->setPosition(pos.x, pos.y);
-    this->text = new sf::Text(text);
-    this->text->setFont(CFontManager::Get()->getFont("Beeb Mode One"));
-    this->text->setCharacterSize(12);
+    this->text = new sf::Text(text, CFontManager::Get()->getFont("Beeb Mode One"), 12);
     this->reAlign();
     this->onClick = NULL;
     this->hover = false;

@@ -5,7 +5,7 @@
 #include <CSingleton.h>
 #include <vector>
 #include <Manager/CPhysicsManager.h>
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <Player/CPLayer.h>
 //Define the Powerup Types
     #define POWERUP_REPAIR 0

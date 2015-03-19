@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <CSingleton.h>
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <Diluculum/LuaState.hpp>
 #include <SFML/System.hpp>
 #include <memory>

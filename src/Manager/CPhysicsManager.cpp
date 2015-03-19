@@ -1,5 +1,5 @@
 #include "Manager/CPhysicsManager.h"
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 #include <CConfig.h>
 #include <iostream>
 #include <sstream>
@@ -9,6 +9,8 @@
 #include <vector>
 #include <CSoundEffect.h>
 #include <Manager/CPowerupManager.h>
+#include <PhysicsDefinitions.hpp>
+
 CContactListener ContactListener;
 
 void physicsThread(b2World *World);
