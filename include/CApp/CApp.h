@@ -37,7 +37,6 @@ class CApp
         int WindowX, WindowY;
         int FPSCounter, FPSCache;
         bool ShootCache;
-        bool ShootCache2;
         int FPSLimiterCache;
         float Framerate;
         int FPS;
@@ -47,7 +46,6 @@ class CApp
         sf::Clock *FrameClock;
         sf::Clock *DoubleclickClock;
         sf::Clock *ShootTimer;
-        sf::Clock *ShootTimer2;
         sf::Time FrameTime;
         CBackgroundMusic *BackgroundMusic;
         CBackground *Background;
@@ -55,10 +53,6 @@ class CApp
             sf::Sprite *infoBar;
             sf::RectangleShape *infoBar_health;
             sf::RectangleShape *infoBar_fuel;
-        //Health & Fuel Bar 2
-            sf::Sprite *infoBar2;
-            sf::RectangleShape *infoBar_health2;
-            sf::RectangleShape *infoBar_fuel2;
         //Game Menu
             CMenuNew::CContainerManager *GameMenuNew;
             CMenuNew::Load *MenuLoader;
@@ -66,7 +60,6 @@ class CApp
         CAsteroidContainer *AsteroidContainer;
         //Entities
             CPlayer *Player;
-            CPlayer *Player2;
 };
 
 #endif // CAPP_H

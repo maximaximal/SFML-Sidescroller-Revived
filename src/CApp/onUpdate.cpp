@@ -70,26 +70,11 @@ void CApp::onUpdate()
             this->infoBar->setColor(sf::Color(255, 255, 255, 190));
         }
         //Info Bar
-        this->infoBar_health2->setSize(sf::Vector2f(138 * ((Player2->health * 10.f) / 100.f), 4));
-        this->infoBar_fuel2->setSize(sf::Vector2f(56 * (Player2->fuel / 1000.f), 2));
-        if(Player2->getPosition().x < CConfig::Get()->getWindowX() / 2 && Player2->getPosition().y + 30> CConfig::Get()->getWindowY() - (25 * this->infoBar2->getScale().y))
-        {
-            this->infoBar_health2->setFillColor(sf::Color(205,0,0, 50));
-            this->infoBar_fuel2->setFillColor(sf::Color(238,201,0, 50));
-            this->infoBar2->setColor(sf::Color(255, 255, 255, 50));
-        }
-        else
-        {
-            this->infoBar_health2->setFillColor(sf::Color(205,0,0, 190));
-            this->infoBar_fuel2->setFillColor(sf::Color(238,201,0, 190));
-            this->infoBar2->setColor(sf::Color(255, 255, 255, 190));
-        }
         BulletContainer->update();
         AsteroidContainer->update(FrameTime.asMilliseconds());
         CScorePopup::Get()->update(FrameTime.asMilliseconds());
         CPowerupManager::Get()->update(FrameTime.asMilliseconds());
         Player->update(FrameTime.asMilliseconds());
-        Player2->update(FrameTime.asMilliseconds());
         CExplosionManager::Get()->update(FrameTime.asMilliseconds());
         stringstream ScoreString;
         ScoreString << "Your Score: " << (int) (CConfig::Get()->getHighscore()) << " Lv " << (int) (CConfig::Get()->getGameLevel());
@@ -98,7 +83,7 @@ void CApp::onUpdate()
         if(!CWebManager::Get()->isConfigValid())
             this->T_Score->setColor(sf::Color::Red);
         this->T_Score->setString(ScoreString.str());
-        if(Player->health <= 0 || Player2->health <= 0)
+        if(Player->health <= 0)
         {
             if(CConfig::Get()->getScreenSaverMode() == false)
             {
@@ -123,7 +108,6 @@ void CApp::onUpdate()
     if(CConfig::Get()->getGameState() == STATE_LOADINGGAME)
     {
         Player->reset();
-        Player2->reset();
         BulletContainer->reset();
         AsteroidContainer->resetAsteroids();
         CPowerupManager::Get()->reset();

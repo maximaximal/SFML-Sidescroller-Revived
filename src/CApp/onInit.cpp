@@ -93,18 +93,13 @@ void CApp::onInit()
     this->FrameClock = new sf::Clock;
     this->DoubleclickClock = new sf::Clock;
     this->ShootTimer = new sf::Clock;
-    this->ShootTimer2 = new sf::Clock;
-    CConfig::Get()->setMP(true);
+    CConfig::Get()->setMP(false);
 
 //Create the Player Entity
     cout << "Create the Player" << endl;
     this->Player = new CPlayer();
     this->Player->init(0);
     this->Player->BulletContainer = BulletContainer;
-//Create the second player Entity
-    this->Player2 = new CPlayer();
-    this->Player2->init(1);
-    this->Player2->BulletContainer = BulletContainer;
 //Init the Menu System
     cout << "Create the (new) Game Menu" << endl;
     this->GameMenuNew = new CMenuNew::CContainerManager(this->App);
@@ -124,19 +119,6 @@ void CApp::onInit()
     this->infoBar->setPosition(sf::Vector2f(5 * this->infoBar->getScale().x, CConfig::Get()->getWindowY() - (25 * this->infoBar->getScale().y)));
     this->infoBar_health->setPosition(sf::Vector2f(10 * this->infoBar->getScale().x, CConfig::Get()->getWindowY() - (24 * this->infoBar->getScale().y)));
     this->infoBar_fuel->setPosition(sf::Vector2f(6 * this->infoBar->getScale().x, CConfig::Get()->getWindowY() - (18 * this->infoBar->getScale().y)));
-//Init & setup the infoBr (health & fuel) 2
-    this->infoBar2 = new sf::Sprite(CTextureManager::Get()->getTexture("GuiSheet"), sf::IntRect(150, 370, 147, 10));
-    this->infoBar_health2 = new sf::RectangleShape(sf::Vector2f(138, 4));
-    this->infoBar_fuel2 = new sf::RectangleShape(sf::Vector2f(56, 2));
-    this->infoBar_health2->setFillColor(sf::Color(205,0,0, 190));
-    this->infoBar_fuel2->setFillColor(sf::Color(238,201,0, 190));
-    this->infoBar2->setColor(sf::Color(255, 255, 255, 190));
-    this->infoBar2->setScale(sf::Vector2f(2 * (CConfig::Get()->getWindowX() / 700.f), 1 * (CConfig::Get()->getWindowX() / 700.f)));
-    this->infoBar_health2->setScale(sf::Vector2f(2 * (CConfig::Get()->getWindowX() / 700.f), 1 * (CConfig::Get()->getWindowX() / 700.f)));
-    this->infoBar_fuel2->setScale(sf::Vector2f(2 * (CConfig::Get()->getWindowX() / 700.f), 1 * (CConfig::Get()->getWindowX() / 700.f)));
-    this->infoBar2->setPosition(sf::Vector2f(5 * this->infoBar->getScale().x + CConfig::Get()->getWindowX() / 2, CConfig::Get()->getWindowY() - (25 * this->infoBar->getScale().y)));
-    this->infoBar_health2->setPosition(sf::Vector2f(10 * this->infoBar->getScale().x + CConfig::Get()->getWindowX() / 2, CConfig::Get()->getWindowY() - (24 * this->infoBar->getScale().y)));
-    this->infoBar_fuel2->setPosition(sf::Vector2f(6 * this->infoBar->getScale().x + CConfig::Get()->getWindowX() / 2, CConfig::Get()->getWindowY() - (18 * this->infoBar->getScale().y)));
 //Load Menu 1
     MenuLoader->MainMenu();
 

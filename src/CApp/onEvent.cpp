@@ -129,28 +129,6 @@ void CApp::onEvent()
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
                 this->Player->move(RIGHT, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-        {
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-                this->Player2->move(UP, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                this->Player2->move(LEFT, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-                this->Player2->move(DOWN, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                this->Player2->move(RIGHT, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
-        }
-        else
-        {
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-                this->Player2->move(UP, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                this->Player2->move(LEFT, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-                this->Player2->move(DOWN, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                this->Player2->move(RIGHT, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
-        }
         //Shoot Event
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
@@ -257,17 +235,6 @@ void CApp::onEvent()
                     ShootMultiplicator = (-60);
                 if(CPowerupManager::Get()->getWeaponLevel() > 3)
                     ShootMultiplicator = (-65);
-            }
-            if(ShootTimer2->getElapsedTime().asMilliseconds() > CConfig::Get()->getShootRate() + ShootMultiplicator && CConfig::Get()->getGameState() == STATE_GAME)
-            {
-                ShootCache2 = false;
-                ShootTimer2->restart();
-            }
-            if(ShootCache2 == false)
-            {
-                Player2->shoot();
-                ShootTimer2->restart();
-                ShootCache2 = true;
             }
         }
     }

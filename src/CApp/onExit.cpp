@@ -10,15 +10,10 @@ void CApp::onExit()
     delete(this->FrameClock);
     delete(this->DoubleclickClock);
     delete(this->ShootTimer);
-    delete(this->ShootTimer2);
     delete(this->Player);
-    delete(this->Player2);
     delete(this->infoBar);
     delete(this->infoBar_fuel);
     delete(this->infoBar_health);
-    delete(this->infoBar2);
-    delete(this->infoBar_fuel2);
-    delete(this->infoBar_health2);
     delete(this->Background);
     delete(this->BulletContainer);
     delete(this->AsteroidContainer);

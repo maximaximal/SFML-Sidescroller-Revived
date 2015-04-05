@@ -14,8 +14,6 @@ void CApp::onRender()
         case STATE_GAME:
             this->App->draw(*this->Background);
             this->App->draw(*Player);
-            if(CConfig::Get()->getMP())
-                this->App->draw(*Player2);
             this->App->draw(*AsteroidContainer);
             this->App->draw(*CExplosionManager::Get());
             this->App->draw(*BulletContainer);
@@ -25,12 +23,6 @@ void CApp::onRender()
             this->App->draw(*this->infoBar_fuel);
             this->App->draw(*this->infoBar_health);
             this->App->draw(*this->infoBar);
-            if(CConfig::Get()->getMP())
-            {
-                this->App->draw(*this->infoBar_fuel2);
-                this->App->draw(*this->infoBar_health2);
-                this->App->draw(*this->infoBar2);
-            }
             break;
         case STATE_MAINMENU:
             this->App->draw(*this->GameMenuNew);
