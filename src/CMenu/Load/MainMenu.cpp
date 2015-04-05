@@ -88,10 +88,28 @@ bool Load::MainMenu()
     versionIndicator->setSize(18);
     versionIndicator->setFont("Beeb Mode One");
     StartGame->onClick = &b_StartGame_onClick;
+    StartGame->downButton = HowTo;
+    StartGame->upButton = QuitGame;
+    StartGame->markHover(true);
+
     QuitGame->onClick = &b_QuitGame_onClick;
+    QuitGame->downButton = StartGame;
+    QuitGame->upButton = button12;
+
     Credits->onClick = &b_Credits_onClick;
+    Credits->downButton = button7;
+    Credits->upButton = HowTo;
+
     button7->onClick = &b_button7_onClick;
+    button7->downButton = button12;
+    button7->upButton = Credits;
+
     button12->onClick = &b_button12_onClick;
+    button12->downButton = QuitGame;
+    button12->upButton = button7;
+
     HowTo->onClick = &b_howTo_onClick;
+    HowTo->downButton = Credits;
+    HowTo->upButton = StartGame;
     return true; //Succefully Created the menu!
 }

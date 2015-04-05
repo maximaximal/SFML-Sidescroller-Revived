@@ -33,6 +33,7 @@ bool Load::Credits()
     CMenuNew::Image *SRCTTP_Games = manager->newImage(sf::Vector2f(CConfig::Get()->getWindowX() - 170, 10), "GuiSheet", sf::IntRect(150, 130, 200, 200));
     SRCTTP_Games->setScale(sf::Vector2f(0.7, 0.7));
     CMenuNew::Button *Back =  manager->newButton(sf::Vector2i(CConfig::Get()->getWindowX() - 200, CConfig::Get()->getWindowY() -50), "Back");
+    Back->markHover(true);
     Back->onClick = &b_Back_onClick;
     std::stringstream CreditsString;
     CreditsString << "Programming: " << endl;

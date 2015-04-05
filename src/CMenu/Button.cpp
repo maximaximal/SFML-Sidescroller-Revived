@@ -3,6 +3,7 @@
 #include <Manager/CFontManager.h>
 #include <CSoundEffect.h>
 #include <iostream>
+#include <CConfig.h>
 
 using namespace CMenuNew;
 using namespace std;
@@ -17,6 +18,10 @@ Button::Button(sf::Vector2i pos, std::string text)
     this->reAlign();
     this->onClick = NULL;
     this->hover = false;
+    this->upButton = NULL;
+    this->downButton = NULL;
+    this->leftButton = NULL;
+    this->rightButton = NULL;
 }
 
 Button::~Button()
@@ -30,11 +35,43 @@ void Button::handleEvent(sf::Event *event)
     {
         if(event->type == sf::Event::MouseButtonPressed)
         {
-            CSoundEffect::Get()->playSound(SOUND_BUTTONPRESSED);
-            if(this->onClick != NULL)
-                (*this->onClick)();
-            else
-                cout << "!! Theres no function connected to this button!" << endl;
+            click();
+        }
+
+        if(event->type == sf::Event::KeyPressed)
+        {
+            if(event->key.code == sf::Keyboard::W && upButton != NULL)
+            {
+                this->markHover(false);
+                upButton->markHover(true);
+                //Ignore the key press in the further event processing (ugly hack - TODO)
+                event->key.code = sf::Keyboard::I;
+            }
+            if(event->key.code == sf::Keyboard::S && downButton != NULL)
+            {
+                this->markHover(false);
+                downButton->markHover(true);
+                //Ignore the key press in the further event processing (ugly hack - TODO)
+                event->key.code = sf::Keyboard::I;
+            }
+            if(event->key.code == sf::Keyboard::A && leftButton != NULL)
+            {
+                this->markHover(false);
+                leftButton->markHover(true);
+                //Ignore the key press in the further event processing (ugly hack - TODO)
+                event->key.code = sf::Keyboard::I;
+            }
+            if(event->key.code == sf::Keyboard::S && rightButton != NULL)
+            {
+                this->markHover(false);
+                rightButton->markHover(true);
+                //Ignore the key press in the further event processing (ugly hack - TODO)
+                event->key.code = sf::Keyboard::I;
+            }
+            if(event->key.code == sf::Keyboard::Space)
+            {
+                click();
+            }
         }
     }
 }
@@ -45,13 +82,11 @@ void Button::handleMouseMove(sf::Vector2i pos)
            && pos.y < (this->sprite->getPosition().y + this->sprite->getLocalBounds().height)
            && pos.y > this->sprite->getPosition().y)
     {
-        this->sprite->setTextureRect(sf::IntRect(0, 25, 150, 25));
-        this->hover = true;
+        markHover(true);
     }
     else
     {
-        this->sprite->setTextureRect(sf::IntRect(0, 0, 150, 25));
-        this->hover = false;
+        markHover(false);
     }
 }
 void Button::setText(std::string text)
@@ -82,4 +117,24 @@ void Button::reAlign()
 {
     this->text->setOrigin((int) this->text->getLocalBounds().width / 2 + 0.5, (int) this->text->getLocalBounds().height / 2 + 0.5);
     this->text->setPosition((int) this->sprite->getLocalBounds().width / 2 + this->sprite->getPosition().x + 0.5, (int) this->sprite->getLocalBounds().height / 2 + this->sprite->getPosition().y + 0.5);
+}
+void Button::click()
+{
+    CSoundEffect::Get()->playSound(SOUND_BUTTONPRESSED);
+    if(this->onClick != NULL)
+        (*this->onClick)();
+    else
+        cout << "!! Theres no function connected to this button!" << endl;
+}
+void Button::markHover(bool hover)
+{
+    if(hover)
+    {
+        this->sprite->setTextureRect(sf::IntRect(0, 25, 150, 25));
+    }
+    else
+    {
+        this->sprite->setTextureRect(sf::IntRect(0, 0, 150, 25));
+    }
+    this->hover = hover;
 }

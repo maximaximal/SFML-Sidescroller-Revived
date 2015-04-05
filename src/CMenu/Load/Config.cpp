@@ -37,8 +37,13 @@ bool Load::Config()
     manager->addToHistory(Entry);
     CMenuNew::Button *button14 =  manager->newButton(sf::Vector2i(CConfig::Get()->getWindowX() - 200, CConfig::Get()->getWindowY() -50), "Save & Back");
     button14->onClick = &b_button14_onClick;
+    button14->markHover(true);
     CMenuNew::Button *Back2 =  manager->newButton(sf::Vector2i(CConfig::Get()->getWindowX() - 200, CConfig::Get()->getWindowY() -80), "Cancel");
     Back2->onClick = &b_Back2_onClick;
+    Back2->downButton = button14;
+    Back2->upButton = button14;
+    button14->downButton = Back2;
+    button14->upButton = Back2;
     //BackgroundMusicVolume Slider
         CMenuNew::Slider *slider1 = manager->newSlider(sf::Vector2f(60, 50), 300); //Background Volume
         CMenuNew::Text *label1 = manager->newText(sf::Vector2f(40, 32), "Background-Music-Volume");

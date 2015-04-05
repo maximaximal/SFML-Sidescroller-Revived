@@ -31,5 +31,6 @@ bool Load::HowTo()
     howToText->setColor(sf::Color::White);
     CMenuNew::Button *button15 =  manager->newButton(sf::Vector2i(CConfig::Get()->getWindowX() - 200, CConfig::Get()->getWindowY() -60), "Back");
     button15->onClick = &b_button15_onClick;
+    button15->markHover(true);
     return true; //Succefully Created the menu!
 }

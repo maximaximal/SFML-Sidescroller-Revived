@@ -27,6 +27,7 @@ bool Load::ViewHighscores()
     manager->addToHistory(Entry);
     CMenuNew::Button *button6 =  manager->newButton(sf::Vector2i(CConfig::Get()->getWindowX() - 200, CConfig::Get()->getWindowY() -120), "Back");
     button6->onClick = &b_button6_onClick;
+    button6->markHover(true);
     scoreText1 = manager->newText(sf::Vector2f(20, 20), "Loading");
     scoreText1->setFont("Monospace");
     scoreText1->setSize(16);

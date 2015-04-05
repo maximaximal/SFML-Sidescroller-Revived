@@ -19,10 +19,16 @@ namespace CMenuNew
             void move(float x, float y);
             sf::Vector2f getPosition();
             void (*onClick)(void);
+            Button *upButton;
+            Button *downButton;
+            Button *leftButton;
+            Button *rightButton;
             bool getState() {return hover;}
             void reAlign();
-        protected:
+            void click();
+            void markHover(bool hover);
             bool hover;
+        protected:
             sf::Sprite *sprite;
             sf::Text *text;
         private:
