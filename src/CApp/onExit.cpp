@@ -3,6 +3,8 @@
 #include <Manager/CFontManager.h>
 #include <Manager/CPhysicsManager.h>
 #include <Explosions/CExplosionManager.h>
+#include <CSoundEffect.h>
+
 void CApp::onExit()
 {
     delete(this->App);
@@ -22,8 +24,11 @@ void CApp::onExit()
         delete(this->BackgroundMusic);
     delete this->MenuLoader;
     delete this->GameMenuNew;
+    if(m_pigaInterface != NULL)
+        delete m_pigaInterface;
     CExplosionManager::Get()->destroy();
     CPhysicsManager::Get()->destroy();
     CTextureManager::Get()->destroy();
     CFontManager::Get()->destroy();
+    CSoundEffect::Get()->destroy();
 }

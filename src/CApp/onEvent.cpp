@@ -9,233 +9,94 @@
 #include <Container/CBulletContainer.h>
 #include <CSoundEffect.h>
 #include <Manager/CPowerupManager.h>
-void CApp::onEvent()
+void CApp::onEvent(sf::Event &Event)
 {
-    sf::Event Event;
-    while(this->App->pollEvent(Event))
+    if(Event.type == sf::Event::Closed)
     {
-        if (Event.type == sf::Event::Closed)
-        {
-            CConfig::Get()->quitGame();
-        }
-        if(CConfig::Get()->getGameState() == STATE_GAMEOVER)
-        {
+        CConfig::Get()->quitGame();
+    }
+    if(CConfig::Get()->getGameState() == STATE_GAMEOVER)
+    {
 
-        }
-        if (Event.type == sf::Event::KeyPressed)
+    }
+    if (Event.type == sf::Event::KeyPressed)
+    {
+        if(Event.key.code == sf::Keyboard::Escape)
         {
-            if(Event.key.code == sf::Keyboard::Escape)
+            if(CConfig::Get()->getGameState() == STATE_GAME)
             {
-                if(CConfig::Get()->getGameState() == STATE_GAME)
-                {
-                    CConfig::Get()->setGameState(STATE_PAUSEMENU);
-                    MenuLoader->PauseMenu();
-                    continue;
-                }
-                if(CConfig::Get()->getGameState() == STATE_PAUSEMENU)
-                {
-                    GameMenuNew->clearHistory();
-                    CConfig::Get()->setGameState(STATE_GAME);
-                }
+                CConfig::Get()->setGameState(STATE_PAUSEMENU);
+                MenuLoader->PauseMenu();
+                return;
             }
-            if(Event.key.code == sf::Keyboard::F2)
+            if(CConfig::Get()->getGameState() == STATE_PAUSEMENU)
             {
-                this->takeScreenshot();
-            }
-            if (Event.key.code == sf::Keyboard::F3)
-            {
-                CConfig::Get()->toggleDebug();
+                GameMenuNew->clearHistory();
+                CConfig::Get()->setGameState(STATE_GAME);
             }
         }
-        if (Event.type == sf::Event::KeyReleased)
+        if(Event.key.code == sf::Keyboard::F2)
         {
-            if(Event.key.code == sf::Keyboard::Q || Event.key.code == sf::Keyboard::Numpad1)
-            {
-                Player->stabilize();
-            }
-            if(Event.key.code == sf::Keyboard::W || Event.key.code == sf::Keyboard::Up)
-            {
-                if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == UP)
-                {
-                    this->Player->quickMove(UP);
-                    this->DoubleclickCache = -1;
-                }
-                else
-                    this->DoubleclickCache = UP;
-                this->DoubleclickClock->restart();
-            }
-            if(Event.key.code == sf::Keyboard::A || Event.key.code == sf::Keyboard::Left)
-            {
-                if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == LEFT)
-                {
-                    this->Player->quickMove(LEFT);
-                    this->DoubleclickCache = -1;
-                }
-                else
-                    this->DoubleclickCache = LEFT;
-                this->DoubleclickClock->restart();
-            }
-            if(Event.key.code == sf::Keyboard::S || Event.key.code == sf::Keyboard::Down)
-            {
-                if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == DOWN)
-                {
-                    this->Player->quickMove(DOWN);
-                    this->DoubleclickCache = -1;
-                }
-                else
-                    this->DoubleclickCache = DOWN;
-                this->DoubleclickClock->restart();
-            }
-            if(Event.key.code == sf::Keyboard::D || Event.key.code == sf::Keyboard::Right)
-            {
-                if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == RIGHT)
-                {
-                    this->Player->quickMove(RIGHT);
-                    this->DoubleclickCache = -1;
-                }
-                else
-                    this->DoubleclickCache = RIGHT;
-                this->DoubleclickClock->restart();
-            }
+            this->takeScreenshot();
         }
-        if(CConfig::Get()->getGameState() == STATE_GUI || CConfig::Get()->getGameState() == STATE_PAUSEMENU)
+        if (Event.key.code == sf::Keyboard::F3)
         {
-            this->GameMenuNew->handleEvent(&Event);
+            CConfig::Get()->toggleDebug();
         }
     }
-
-    if(CConfig::Get()->getGameState() == STATE_GAME)
+    if (Event.type == sf::Event::KeyReleased)
     {
-        //Move-Events
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+        if(Event.key.code == sf::Keyboard::Q || Event.key.code == sf::Keyboard::Numpad1)
         {
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-                this->Player->move(UP, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-                this->Player->move(LEFT, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                this->Player->move(DOWN, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                this->Player->move(RIGHT, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
+            Player->stabilize();
         }
-        else
+        if(Event.key.code == sf::Keyboard::W || Event.key.code == sf::Keyboard::Up)
         {
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-                this->Player->move(UP, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-                this->Player->move(LEFT, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                this->Player->move(DOWN, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                this->Player->move(RIGHT, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
+            if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == UP_)
+            {
+                this->Player->quickMove(UP_);
+                this->DoubleclickCache = -1;
+            }
+            else
+                this->DoubleclickCache = UP_;
+            this->DoubleclickClock->restart();
         }
-        //Shoot Event
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        if(Event.key.code == sf::Keyboard::A || Event.key.code == sf::Keyboard::Left)
         {
-            int ShootMultiplicator = 0; //Value to manipulate the shoot speed
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_RED)
+            if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == LEFT_)
             {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = 0;
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = (-30);
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = 80;
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = 170;
+                this->Player->quickMove(LEFT_);
+                this->DoubleclickCache = -1;
             }
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_MAGENTA)
-            {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = 300;
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = 250;
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = 200;
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = 200;
-            }
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_GREEN)
-            {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = 0;
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = (-10);
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = (-20);
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = (-20);
-            }
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_BLUE)
-            {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = (-20);
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = (-40);
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = (-60);
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = (-65);
-            }
-            if(ShootTimer->getElapsedTime().asMilliseconds() > CConfig::Get()->getShootRate() + ShootMultiplicator && CConfig::Get()->getGameState() == STATE_GAME)
-            {
-                ShootCache = false;
-                ShootTimer->restart();
-            }
-            if(ShootCache == false)
-            {
-                Player->shoot();
-                ShootTimer->restart();
-                ShootCache = true;
-            }
+            else
+                this->DoubleclickCache = LEFT_;
+            this->DoubleclickClock->restart();
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Numpad0))
+        if(Event.key.code == sf::Keyboard::S || Event.key.code == sf::Keyboard::Down)
         {
-            int ShootMultiplicator = 0; //Value to manipulate the shoot speed
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_RED)
+            if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == DOWN_)
             {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = 0;
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = (-30);
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = 80;
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = 170;
+                this->Player->quickMove(DOWN_);
+                this->DoubleclickCache = -1;
             }
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_MAGENTA)
-            {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = 300;
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = 250;
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = 200;
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = 200;
-            }
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_GREEN)
-            {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = 0;
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = (-10);
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = (-20);
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = (-20);
-            }
-            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_BLUE)
-            {
-                if(CPowerupManager::Get()->getWeaponLevel() == 1)
-                    ShootMultiplicator = (-20);
-                if(CPowerupManager::Get()->getWeaponLevel() == 2)
-                    ShootMultiplicator = (-40);
-                if(CPowerupManager::Get()->getWeaponLevel() == 3)
-                    ShootMultiplicator = (-60);
-                if(CPowerupManager::Get()->getWeaponLevel() > 3)
-                    ShootMultiplicator = (-65);
-            }
+            else
+                this->DoubleclickCache = DOWN_;
+            this->DoubleclickClock->restart();
         }
+        if(Event.key.code == sf::Keyboard::D || Event.key.code == sf::Keyboard::Right)
+        {
+            if(this->DoubleclickClock->getElapsedTime().asMilliseconds() < CConfig::Get()->getDoubleTapSpeed() && this->DoubleclickCache == RIGHT_)
+            {
+                this->Player->quickMove(RIGHT_);
+                this->DoubleclickCache = -1;
+            }
+            else
+                this->DoubleclickCache = RIGHT_;
+            this->DoubleclickClock->restart();
+        }
+    }
+    if(CConfig::Get()->getGameState() == STATE_GUI || CConfig::Get()->getGameState() == STATE_PAUSEMENU)
+    {
+        this->GameMenuNew->handleEvent(&Event);
     }
 }

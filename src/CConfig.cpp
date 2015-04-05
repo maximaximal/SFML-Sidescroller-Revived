@@ -81,6 +81,7 @@ bool CConfig::load()
     this->backgroundStarsCount = ls["backgroundStarsCount"].value().asNumber();
     this->backgroundStarsCountDefault = this->backgroundStarsCount;
     this->debug = ls["debug"]["active"].value().asBoolean();
+    this->pigaInputs = ls["pigaInputs"].value().asBoolean();
     this->WindowX = ls["WindowX"].value().asNumber();
     this->WindowY = ls["WindowY"].value().asNumber();
     this->doubleTapSpeed = ls["doubleTapSpeed"].value().asNumber();
@@ -149,6 +150,8 @@ void CConfig::writeToScript()
     write << "	OS = " << this->OS << ";" << endl;
     write << "-- extreme Mode (Sets the levelup-points from 200 to 20)" << endl;
     write << "	extremeMode = " << this->toLuaBoolean(this->extremeMode) << ";			--RESTRICTED" << endl;
+    write << "-- piga inputs (needs a piga-host to be run!)" << endl;
+    write << "  pigaInputs = " << this->toLuaBoolean(this->pigaInputs);
     write << "-- Screensaver Mode" << endl;
     write << "	ScreenSaverMode = " << this->toLuaBoolean(this->ScreenSaverMode) << ";" << endl;
     write << "-- number of stars in the background (-1 = automatic)" << endl;

@@ -14,6 +14,95 @@
 void CApp::onUpdate()
 {
     using namespace std;
+
+    if(CConfig::Get()->getGameState() == STATE_GAME)
+    {
+        //Move-Events
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || charge)
+        {
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || up)
+                this->Player->move(UP_, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || left)
+                this->Player->move(LEFT_, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) || down)
+                this->Player->move(DOWN_, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || right)
+                this->Player->move(RIGHT_, CConfig::Get()->getShiftMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 1);
+        }
+        else
+        {
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) || up)
+                this->Player->move(UP_, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || left)
+                this->Player->move(LEFT_, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) || down)
+                this->Player->move(DOWN_, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || right)
+                this->Player->move(RIGHT_, CConfig::Get()->getNormalMoveForce() / 60 * this->FrameTime.asMilliseconds() * 4, 0);
+        }
+        //Shoot Event
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || shoot)
+        {
+            int ShootMultiplicator = 0; //Value to manipulate the shoot speed
+            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_RED)
+            {
+                if(CPowerupManager::Get()->getWeaponLevel() == 1)
+                    ShootMultiplicator = 0;
+                if(CPowerupManager::Get()->getWeaponLevel() == 2)
+                    ShootMultiplicator = (-30);
+                if(CPowerupManager::Get()->getWeaponLevel() == 3)
+                    ShootMultiplicator = 80;
+                if(CPowerupManager::Get()->getWeaponLevel() > 3)
+                    ShootMultiplicator = 170;
+            }
+            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_MAGENTA)
+            {
+                if(CPowerupManager::Get()->getWeaponLevel() == 1)
+                    ShootMultiplicator = 300;
+                if(CPowerupManager::Get()->getWeaponLevel() == 2)
+                    ShootMultiplicator = 250;
+                if(CPowerupManager::Get()->getWeaponLevel() == 3)
+                    ShootMultiplicator = 200;
+                if(CPowerupManager::Get()->getWeaponLevel() > 3)
+                    ShootMultiplicator = 200;
+            }
+            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_GREEN)
+            {
+                if(CPowerupManager::Get()->getWeaponLevel() == 1)
+                    ShootMultiplicator = 0;
+                if(CPowerupManager::Get()->getWeaponLevel() == 2)
+                    ShootMultiplicator = (-10);
+                if(CPowerupManager::Get()->getWeaponLevel() == 3)
+                    ShootMultiplicator = (-20);
+                if(CPowerupManager::Get()->getWeaponLevel() > 3)
+                    ShootMultiplicator = (-20);
+            }
+            if(CPowerupManager::Get()->getWeapon() == POWERUP_LASER_BLUE)
+            {
+                if(CPowerupManager::Get()->getWeaponLevel() == 1)
+                    ShootMultiplicator = (-20);
+                if(CPowerupManager::Get()->getWeaponLevel() == 2)
+                    ShootMultiplicator = (-40);
+                if(CPowerupManager::Get()->getWeaponLevel() == 3)
+                    ShootMultiplicator = (-60);
+                if(CPowerupManager::Get()->getWeaponLevel() > 3)
+                    ShootMultiplicator = (-65);
+            }
+            if(ShootTimer->getElapsedTime().asMilliseconds() > CConfig::Get()->getShootRate() + ShootMultiplicator && CConfig::Get()->getGameState() == STATE_GAME)
+            {
+                ShootCache = false;
+                ShootTimer->restart();
+            }
+            if(ShootCache == false)
+            {
+                Player->shoot();
+                ShootTimer->restart();
+                ShootCache = true;
+            }
+        }
+    }
+
+
     this->FrameTime = this->FrameClock->getElapsedTime();
     this->FrameClock->restart();
     this->FPSCounter++;

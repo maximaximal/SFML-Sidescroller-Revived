@@ -6,10 +6,10 @@
 #include <CBackground/CBackground.h>
 #include <Player/CPLayer.h>
 //Define Directions
-    #define RIGHT 0
-    #define DOWN 1
-    #define LEFT 2
-    #define UP 3
+    #define RIGHT_ 0
+    #define DOWN_ 1
+    #define LEFT_ 2
+    #define UP_ 3
 
 #include <CMenu.h>
 #include <Container/CBulletContainer.h>
@@ -18,6 +18,8 @@
 #include <CMenu/CContainerManager.h>
 #include <CMenu/Button.h>
 #include <CMenu/Load.h>
+#include <piga/Interface.hpp>
+
 class CPlayer;
 
 class CApp
@@ -27,7 +29,7 @@ class CApp
         void onRender();
         void onUpdate();
         void onExit();
-        void onEvent();
+        void onEvent(sf::Event &Event);
         void takeScreenshot();
         CApp();
         virtual ~CApp();
@@ -49,6 +51,8 @@ class CApp
         sf::Time FrameTime;
         CBackgroundMusic *BackgroundMusic;
         CBackground *Background;
+
+        piga::Interface *m_pigaInterface;
         //Health & Fuel Bar
             sf::Sprite *infoBar;
             sf::RectangleShape *infoBar_health;
@@ -60,6 +64,8 @@ class CApp
         CAsteroidContainer *AsteroidContainer;
         //Entities
             CPlayer *Player;
+
+        bool up, down, left, right, shoot, stabilize, charge;
 };
 
 #endif // CAPP_H

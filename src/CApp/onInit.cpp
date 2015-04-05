@@ -119,6 +119,15 @@ void CApp::onInit()
     this->infoBar->setPosition(sf::Vector2f(5 * this->infoBar->getScale().x, CConfig::Get()->getWindowY() - (25 * this->infoBar->getScale().y)));
     this->infoBar_health->setPosition(sf::Vector2f(10 * this->infoBar->getScale().x, CConfig::Get()->getWindowY() - (24 * this->infoBar->getScale().y)));
     this->infoBar_fuel->setPosition(sf::Vector2f(6 * this->infoBar->getScale().x, CConfig::Get()->getWindowY() - (18 * this->infoBar->getScale().y)));
+//Init the piga interface
+    if(CConfig::Get()->getPigaInputs())
+    {
+        m_pigaInterface = new piga::Interface(false);
+    }
+    else
+    {
+        m_pigaInterface = NULL;
+    }
 //Load Menu 1
     MenuLoader->MainMenu();
 
@@ -128,7 +137,75 @@ void CApp::onInit()
     cout << "Starting the Game-Loop" << endl;
     while(CConfig::Get()->isRunning())
     {
-        this->onEvent();
+        sf::Event e;
+        if(m_pigaInterface != NULL)
+        {
+            m_pigaInterface->update();
+            piga::GameEvent pigaEvent;
+            while(m_pigaInterface->pollEvent(pigaEvent))
+            {
+                if(pigaEvent.type() == piga::GameEvent::GameEventType::GameInput)
+                {
+                    bool fireEvent = true;
+
+                    if(pigaEvent.gameInput.state())
+                    {
+                        e.type = sf::Event::KeyPressed;
+                    }
+                    else
+                    {
+                        e.type = sf::Event::KeyReleased;
+                    }
+
+                    switch(pigaEvent.gameInput.control())
+                    {
+                        case piga::ACTION:
+                            e.key.code = sf::Keyboard::Space;
+                            break;
+                        case piga::UP:
+                            e.key.code = sf::Keyboard::W;
+                            up = pigaEvent.gameInput.state();
+                            break;
+                        case piga::DOWN:
+                            e.key.code = sf::Keyboard::S;
+                            down = pigaEvent.gameInput.state();
+                            break;
+                        case piga::LEFT:
+                            e.key.code = sf::Keyboard::A;
+                            left = pigaEvent.gameInput.state();
+                            break;
+                        case piga::RIGHT:
+                            e.key.code = sf::Keyboard::D;
+                            right = pigaEvent.gameInput.state();
+                            break;
+                        case piga::BUTTON1:
+                            e.key.code = sf::Keyboard::Q;
+                            stabilize = pigaEvent.gameInput.state();
+                            break;
+                        case piga::BUTTON2:
+                            e.key.code = sf::Keyboard::Escape;
+                            break;
+                        case piga::BUTTON3:
+                            charge = pigaEvent.gameInput.state();
+                            break;
+                        default:
+                            fireEvent = false;
+                            break;
+                    }
+
+                    if(fireEvent)
+                    {
+                        onEvent(e);
+                    }
+                }
+            }
+        }
+
+        while(this->App->pollEvent(e))
+        {
+            this->onEvent(e);
+        }
+
         this->onUpdate();
         this->onRender();
         if(CConfig::Get()->isFirstRun())

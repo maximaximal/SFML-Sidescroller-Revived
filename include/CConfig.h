@@ -60,6 +60,7 @@ class CConfig : public TSingleton<CConfig>
         void setBackgroundMusicVolume(int volume) {backgroundMusicVolume = volume;}
         void setSoundVolume(int volume) {soundVolume = volume;}
         void setMP(bool setTo) {LocalMultiplayer = setTo;}
+        void setPigaInputs(bool setTo) {pigaInputs = setTo;}
         std::string getNickname() {return nickname;}
         int getShootRate() {return shootRate;}
         int getQuickMoveForce() {return quickMoveForce;}
@@ -72,6 +73,7 @@ class CConfig : public TSingleton<CConfig>
         int getStartLaserLevel() {return startLaserLevel;}
         int getBackgroundMusicVolume() {return backgroundMusicVolume;}
         int getSoundVolume() {return soundVolume;}
+        bool getPigaInputs() {return pigaInputs;}
         void addToHighscore(int amount) {highscoreCache += amount;}
         void setBackgroundMusic(bool backgroundMusic) {this->backgroundMusic = backgroundMusic;}
         float getVersion() {return version;}
@@ -112,6 +114,7 @@ class CConfig : public TSingleton<CConfig>
         int WindowX, WindowY;
         float timeStep;
         int velocityIterations, positionIterations;
+        bool pigaInputs;
 };
 
 #endif // CCONFIG_H

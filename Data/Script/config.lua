@@ -26,6 +26,8 @@
 	doubleTapSpeed = 0; --Deactivated because it sucks xD - Standard Value would be around 180 though
 -- Shoot Rate (Delay between a shot - in milliseconds)
 	shootRate = 150;			--RESTRICTED
+-- piga inputs (requires running piga host!)
+	pigaInputs = false
 -- Start Laser
 -- 1 = RED
 -- 2 = BLUE

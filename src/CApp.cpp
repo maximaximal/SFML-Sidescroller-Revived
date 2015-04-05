@@ -10,7 +10,13 @@
 #include <time.h>
 CApp::CApp()
 {
-
+    up = false;
+    down = false;
+    left = false;
+    right = false;
+    shoot = false;
+    stabilize = false;
+    charge = false;
 }
 
 CApp::~CApp()
