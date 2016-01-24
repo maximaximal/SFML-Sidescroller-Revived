@@ -51,5 +51,6 @@ int main(int argc, char** argv)
         //There was a data dir specified!
         CConfig::Get()->setDataDir(argv[1]);
     }
+    CConfig::Get()->load();
     game.onInit();
 }

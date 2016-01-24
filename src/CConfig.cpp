@@ -42,7 +42,6 @@ CConfig::CConfig()
         this->running = true;
     std::cout << "Loading Config..." << std::endl;
     this->highscoreCache = 0;
-    this->load();
 }
 void CConfig::toggleDebug()
 {
