@@ -10,7 +10,7 @@
 
 CTextureManager::CTextureManager()
 {
-    this->createTexture("Data/Textures/TextureError.png", "TextureError");
+    this->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/TextureError.png", "TextureError");
 }
 
 int CTextureManager::textureLoaded(std::string Name)

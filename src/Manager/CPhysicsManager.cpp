@@ -24,8 +24,8 @@ CPhysicsManager::CPhysicsManager()
     m_timeStep = new float;
     *m_timeStep = 1.f/60.f;
 
-    //Read Fixtures from lua "Data/Script/fixtures.lua"
-        ls.doFile("Data/Script/fixtures.lua");
+    //Read Fixtures from lua CConfig::Get()->getDataDir() + "/Data/Script/fixtures.lua"
+        ls.doFile(CConfig::Get()->getDataDir() + "/Data/Script/fixtures.lua");
 
     //Set Contact Listener
         this->World->SetContactListener(&ContactListener);

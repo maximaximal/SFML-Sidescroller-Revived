@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <ctime>
 #include <Explosions/CParticle.h>
+#include <CConfig.h>
+
 CExplosion::CExplosion(sf::Vector2f pos, float rotation, int size)
 {
     this->explosionSprite = new sf::Sprite();
     this->timer = new sf::Clock();
     //Init the Texture (For security reasons)
-        CTextureManager::Get()->createTexture("Data/Textures/explosionsSheet.png", "ExplosionsSheet");
+        CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/explosionsSheet.png", "ExplosionsSheet");
     //Set the protected variables
         this->pos = pos;
         this->rotation = rotation;

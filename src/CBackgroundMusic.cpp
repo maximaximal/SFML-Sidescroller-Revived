@@ -7,7 +7,7 @@ CBackgroundMusic::CBackgroundMusic()
 {
     this->music = new sf::Music();
     this->music->setVolume(40);
-    ls.doFile("Data/Script/backgroundMusic.lua");
+    ls.doFile(CConfig::Get()->getDataDir() + "/Data/Script/backgroundMusic.lua");
     Playlist = 1;
 }
 void CBackgroundMusic::stop()
@@ -28,7 +28,7 @@ void CBackgroundMusic::update()
             music->stop();
         if(CConfig::Get()->getGameState() == STATE_CREDITS && Status == 0 && CreditsSong)
         {
-            music->openFromFile("Data/Music/Concob.ogg");
+            music->openFromFile(CConfig::Get()->getDataDir() + "/Data/Music/Concob.ogg");
             music->play();
             CreditsSong = false;
         }

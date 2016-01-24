@@ -18,17 +18,17 @@ CMenu::CMenu()
     Background->setScale(CConfig::Get()->getWindowX() / 1100.f, CConfig::Get()->getWindowX() / 1100.f);
     Background->setPosition(CConfig::Get()->getWindowX() / 2, CConfig::Get()->getWindowY() / 2);
     this->rotation = new float;
-    CTextureManager::Get()->createTexture("Data/Textures/HowTo.png", "HowTo");
-    if(CTextureManager::Get()->createTexture("Data/Textures/MenuBackground2.png", "MenuBackground") == -1)
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/HowTo.png", "HowTo");
+    if(CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/MenuBackground2.png", "MenuBackground") == -1)
     {
         cout << "!! This Computer can't handle a 2000x2000px PNG." << endl;
         cout << "   Loading 1000x1000 alternative..." << endl;
         CTextureManager::Get()->deleteTexture("MenuBackground");
-        CTextureManager::Get()->createTexture("Data/Textures/MenuBackground2_lowRes.png", "MenuBackground");
+        CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/MenuBackground2_lowRes.png", "MenuBackground");
         Background->setOrigin(500, 500);
         Background->setScale(CConfig::Get()->getWindowX() / 600.f, CConfig::Get()->getWindowX() / 600.f);
     }
-    CTextureManager::Get()->createTexture("Data/Textures/Gui.png", "GuiSheet");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/Gui.png", "GuiSheet");
     this->lastMenuID = 0;
     this->locked = false;
 }

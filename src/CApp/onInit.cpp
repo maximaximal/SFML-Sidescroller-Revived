@@ -39,15 +39,15 @@ void CApp::onInit()
     this->App->setFramerateLimit(60);
 //Init the Fonts
     cout << "Loading Fonts" << endl;
-    CTextureManager::Get()->createTexture("Data/Textures/Logo.png", "Logo");
-    CFontManager::Get()->createFont("Data/Fonts/Beeb Mode One.ttf", "Beeb Mode One");
-    CFontManager::Get()->createFont("Data/Fonts/LiquidCrystal-Normal.otf", "Computerfont");
-    CFontManager::Get()->createFont("Data/Fonts/Inconsolata.otf", "Monospace");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/Logo.png", "Logo");
+    CFontManager::Get()->createFont(CConfig::Get()->getDataDir() + "/Data/Fonts/Beeb Mode One.ttf", "Beeb Mode One");
+    CFontManager::Get()->createFont(CConfig::Get()->getDataDir() + "/Data/Fonts/LiquidCrystal-Normal.otf", "Computerfont");
+    CFontManager::Get()->createFont(CConfig::Get()->getDataDir() + "/Data/Fonts/Inconsolata.otf", "Monospace");
 //Init the Major textures
     cout << "Loading Graphics" << endl;
-    CTextureManager::Get()->createTexture("Data/Textures/StarSheet2.png", "StarSheet");
-    CTextureManager::Get()->createTexture("Data/Textures/SpaceshipSheet.png", "SpaceshipSheet");
-    CTextureManager::Get()->createTexture("Data/Textures/explosionsSheet.png", "ExplosionsSheet");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/StarSheet2.png", "StarSheet");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/SpaceshipSheet.png", "SpaceshipSheet");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/explosionsSheet.png", "ExplosionsSheet");
 //Init the Web Manager
     CWebManager::Get();
 //Validate Config

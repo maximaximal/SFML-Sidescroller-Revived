@@ -36,7 +36,7 @@ void CApp::takeScreenshot()
     timeinfo = localtime ( &rawtime );
     Screenshot = this->App->capture();
     stringstream filename;
-    filename << "Data/Screenshots/";
+    filename << CConfig::Get()->getDataDir() + "/Data/Screenshots/";
     filename << time(NULL);
     filename << ".png";
     Screenshot.saveToFile(filename.str());
@@ -44,8 +44,12 @@ void CApp::takeScreenshot()
     CPhysicsManager::Get()->WorldMutex.unlock();
 }
 
-int main()
+int main(int argc, char** argv)
 {
     CApp game;
+    if(argc == 2) {
+        //There was a data dir specified!
+        CConfig::Get()->setDataDir(argv[1]);
+    }
     game.onInit();
 }

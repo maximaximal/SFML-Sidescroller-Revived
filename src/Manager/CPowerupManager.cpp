@@ -12,7 +12,7 @@ using namespace std;
 
 CPowerupManager::CPowerupManager()
 {
-    CTextureManager::Get()->createTexture("Data/Textures/Powerups.png", "PowerupSheet");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/Powerups.png", "PowerupSheet");
     this->weapon = POWERUP_LASER_RED;
     this->weaponLevel = 1;
 }

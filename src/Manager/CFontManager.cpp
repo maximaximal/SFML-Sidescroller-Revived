@@ -10,7 +10,7 @@
 
 CFontManager::CFontManager()
 {
-    this->createFont("Data/Fonts/arial.ttf", "Arial");
+    this->createFont(CConfig::Get()->getDataDir() + "/Data/Fonts/arial.ttf", "Arial");
 }
 
 int CFontManager::fontLoaded(std::string Name)

@@ -1,9 +1,11 @@
 #include "CScorePopup.h"
 #include <Manager/CTextureManager.h>
 #include <math.h>
+#include <CConfig.h>
+
 CScorePopup::CScorePopup()
 {
-    this->guiSheetSlot = CTextureManager::Get()->createTexture("Data/Textures/Gui.png", "GuiSheet");
+    this->guiSheetSlot = CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/Gui.png", "GuiSheet");
 }
 
 CScorePopup::~CScorePopup()

@@ -12,17 +12,17 @@ CSoundEffect::CSoundEffect()
     this->asteroidCollisionSound = new sf::SoundBuffer;
     this->powerupApplySound = new sf::SoundBuffer;
     this->buttonPressedSound = new sf::SoundBuffer;
-    if(!powerupSound->loadFromFile("Data/Sounds/powerup.flac"))
+    if(!powerupSound->loadFromFile(CConfig::Get()->getDataDir() + "/Data/Sounds/powerup.flac"))
         cout << "!! Could not load the Data/Sounds/powerup.flac Sound!" << endl;
-    if(!powerupApplySound->loadFromFile("Data/Sounds/applyPowerup.flac"))
+    if(!powerupApplySound->loadFromFile(CConfig::Get()->getDataDir() + "/Data/Sounds/applyPowerup.flac"))
         cout << "!! Could not load the Data/Sounds/applyPowerup.flac Sound!" << endl;
-    if(!laserShotSound->loadFromFile("Data/Sounds/laserShot.flac"))
+    if(!laserShotSound->loadFromFile(CConfig::Get()->getDataDir() + "/Data/Sounds/laserShot.flac"))
         cout << "!! Could not load the Data/Sounds/laserShot.flac Sound!" << endl;
-    if(!asteroidCollisionSound->loadFromFile("Data/Sounds/asteroidHit.flac"))
+    if(!asteroidCollisionSound->loadFromFile(CConfig::Get()->getDataDir() + "/Data/Sounds/asteroidHit.flac"))
         cout << "!! Could not load the Data/Sounds/asteroidHit.flac Sound!" << endl;
-    if(!explosionSound->loadFromFile("Data/Sounds/explosion.flac"))
+    if(!explosionSound->loadFromFile(CConfig::Get()->getDataDir() + "/Data/Sounds/explosion.flac"))
         cout << "!! Could not load the Data/Sounds/explosion.flac Sound!" << endl;
-    if(!buttonPressedSound->loadFromFile("Data/Sounds/button.flac"))
+    if(!buttonPressedSound->loadFromFile(CConfig::Get()->getDataDir() + "/Data/Sounds/button.flac"))
         cout << "!! Could not load the Data/Sounds/button.flac Sound!" << endl;
 }
 void CSoundEffect::playSound(int SoundID)

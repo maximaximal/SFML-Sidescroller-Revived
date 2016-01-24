@@ -17,6 +17,7 @@ using namespace std;
 
 CConfig::CConfig()
 {
+    dataDir = "./";
     //Set the Version
         this->version = 0.08;
     //default settings (in case there is no config file)
@@ -76,7 +77,7 @@ int CConfig::getGameLevel()
 bool CConfig::load()
 {
     Diluculum::LuaState ls;
-    ls.doFile("Data/Script/config.lua");
+    ls.doFile(dataDir + "/Data/Script/config.lua");
     this->backgroundStarsStyle = ls["backgroundStarsStyle"].value().asNumber();
     this->backgroundStarsCount = ls["backgroundStarsCount"].value().asNumber();
     this->backgroundStarsCountDefault = this->backgroundStarsCount;
@@ -181,7 +182,7 @@ void CConfig::writeToScript()
     write << "		shiftMove = " << this->shiftMoveForce << ";		--RESTRICTED" << endl;
     write << "		quickMove = " << this->quickMoveForce << ";		--RESTRICTED" << endl;
     write << "	}" << endl;
-    ofstream file("Data/Script/config.lua", ofstream::binary);
+    ofstream file(CConfig::Get()->getDataDir() + "/Data/Script/config.lua", ofstream::binary);
     file << write.str();
     file.close();
 }
@@ -191,4 +192,8 @@ std::string CConfig::toLuaBoolean(int boolean)
         return "false";
     else
         return "true";
+}
+void CConfig::setDataDir(const string &dataDir)
+{
+    this->dataDir = dataDir;
 }

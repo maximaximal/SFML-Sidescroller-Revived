@@ -11,7 +11,7 @@ using namespace std;
 Button::Button(sf::Vector2i pos, std::string text)
 {
     this->type = CMenuNew::type::button;
-    CTextureManager::Get()->createTexture("Data/Textures/Gui.png", "GuiSheet");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/Gui.png", "GuiSheet");
     this->sprite = new sf::Sprite(CTextureManager::Get()->getTexture("GuiSheet"), sf::IntRect(0, 0, 150, 25));
     this->sprite->setPosition(pos.x, pos.y);
     this->text = new sf::Text(text, CFontManager::Get()->getFont("Beeb Mode One"), 12);

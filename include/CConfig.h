@@ -28,6 +28,7 @@ class CConfig : public TSingleton<CConfig>
         CConfig();
         virtual ~CConfig();
         bool load();
+        std::string getDataDir() {return dataDir;}
         int getBackgroundStarsCount() {return backgroundStarsCount;}
         int getBackgroundStarsStyle() {return backgroundStarsStyle;}
         int getWindowX() const {return WindowX;}
@@ -79,6 +80,7 @@ class CConfig : public TSingleton<CConfig>
         float getVersion() {return version;}
         void writeToScript();
         std::string toLuaBoolean(int boolean);
+        void setDataDir(const std::string &dataDir);
     protected:
     private:
         int normalMoveForce, quickMoveForce, shiftMoveForce;
@@ -94,6 +96,7 @@ class CConfig : public TSingleton<CConfig>
         int startLaser;
         int startLaserLevel;
         std::string nickname;
+        std::string dataDir;
         bool extremeMode;
         bool debug;
         bool debug_TextureManager;

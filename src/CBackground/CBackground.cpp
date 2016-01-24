@@ -46,7 +46,7 @@ CBackground::CBackground()
         if(CConfig::Get()->getBackgroundStarsStyle() == 0)
         {
             CTextureManager::Get()->deleteTexture("StarSheet");
-            CTextureManager::Get()->createTexture("Data/Textures/StarSheet.png", "StarSheet");
+            CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/StarSheet.png", "StarSheet");
             this->starRectangles.resize(7);
             for(i = 0;i < 3;i++)
             {

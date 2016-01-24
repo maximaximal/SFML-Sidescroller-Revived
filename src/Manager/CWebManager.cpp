@@ -64,7 +64,7 @@ void CWebManager::validateConfig()
     md5stream << CConfig::Get()->getShootRate() << CConfig::Get()->getNormalMoveForce() << CConfig::Get()->getShiftMoveForce() << CConfig::Get()->getQuickMoveForce();
     md5stream << CConfig::Get()->getStartLaser() << CConfig::Get()->getStartLaserLevel();
     md5stream << CConfig::Get()->getVersion();
-    md5stream << this->readFile2("Data/Script/fixtures.lua");
+    md5stream << this->readFile2(CConfig::Get()->getDataDir() + "/Data/Script/fixtures.lua");
     hashwrapper *h = new md5wrapper();
 	h->test();
 	std::string md5 = h->getHashFromString(md5stream.str());
@@ -131,7 +131,7 @@ void submitScoreThreadFunction(std::string *scores)
     md5stream << CConfig::Get()->getShootRate() << CConfig::Get()->getNormalMoveForce() << CConfig::Get()->getShiftMoveForce() << CConfig::Get()->getQuickMoveForce();
     md5stream << CConfig::Get()->getStartLaser() << CConfig::Get()->getStartLaserLevel();
     md5stream << CConfig::Get()->getVersion();
-    md5stream << CWebManager::Get()->readFile2("Data/Script/fixtures.lua");
+    md5stream << CWebManager::Get()->readFile2(CConfig::Get()->getDataDir() + "/Data/Script/fixtures.lua");
     hashwrapper *h = new md5wrapper();
 	h->test();
 	std::string md5 = h->getHashFromString(md5stream.str());

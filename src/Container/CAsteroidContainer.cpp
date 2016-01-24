@@ -14,8 +14,8 @@
 
 CAsteroidContainer::CAsteroidContainer()
 {
-    CTextureManager::Get()->createTexture("Data/Textures/MeteorSheet1.png", "MeteorSheet");
-    CTextureManager::Get()->createTexture("Data/Textures/DamageSheet_32x32.png", "DamageSheet_32x32");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/MeteorSheet1.png", "MeteorSheet");
+    CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/DamageSheet_32x32.png", "DamageSheet_32x32");
     this->maxAsteroids = CConfig::Get()->getMaxAsteroids();
     this->SpawnTimer = new sf::Clock();
     IDIterator = 0;

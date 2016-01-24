@@ -24,7 +24,7 @@ bool Load::HowTo()
     Entry->load = &Load::HowTo;
     Entry->name = "View HowTo";
     manager->addToHistory(Entry);
-    CMenuNew::Text *howToText = manager->newText(sf::Vector2f(20, 20), CWebManager::Get()->readFile2("Data/howto.txt"));
+    CMenuNew::Text *howToText = manager->newText(sf::Vector2f(20, 20), CWebManager::Get()->readFile2(CConfig::Get()->getDataDir() + "/Data/howto.txt"));
     howToText->setFont("Monospace");
     howToText->setSize(16);
     howToText->setScrollable(true);

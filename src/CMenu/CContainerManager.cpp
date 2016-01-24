@@ -169,7 +169,7 @@ void CContainerManager::activateBackgroundImage()
 {
     stringstream file;
     srand ( time(NULL) );
-    file << "Data/Textures/MenuBackground";
+    file << CConfig::Get()->getDataDir() + "/Data/Textures/MenuBackground";
     file << rand() % 3 + 1;
     file << ".png";
     this->Background = new sf::Sprite();
@@ -181,7 +181,7 @@ void CContainerManager::activateBackgroundImage()
         cout << "   Loading 1000x1000 alternative..." << endl;
         CTextureManager::Get()->deleteTexture("MenuBackground");
         file.str("");
-        file << "Data/Textures/MenuBackground";
+        file << CConfig::Get()->getDataDir() + "/Data/Textures/MenuBackground";
         file << rand() % 3 + 1;
         file << "_lowRes.png";
         CTextureManager::Get()->createTexture(file.str(), "MenuBackground");

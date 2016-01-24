@@ -22,7 +22,7 @@ bool CPlayer::init(int type)
 {
     this->type = type;
     //Load Sprite
-        CTextureManager::Get()->createTexture("Data/Textures/SpaceshipSheet.png", "SpaceshipSheet");
+        CTextureManager::Get()->createTexture(CConfig::Get()->getDataDir() + "/Data/Textures/SpaceshipSheet.png", "SpaceshipSheet");
         this->EntitySprite.setTexture(CTextureManager::Get()->getTexture("SpaceshipSheet"));
     //Init Physics
         b2BodyDef PlayerBodyDef;
