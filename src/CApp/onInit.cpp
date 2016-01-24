@@ -142,7 +142,7 @@ void CApp::onInit()
         {
             m_pigaInterface->update();
             piga::GameEvent pigaEvent;
-            while(m_pigaInterface->pollEvent(pigaEvent))
+            while(m_pigaInterface->pollEvent(&pigaEvent))
             {
                 if(pigaEvent.type() == piga::GameEvent::GameEventType::GameInput)
                 {

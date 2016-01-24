@@ -1,0 +1,12 @@
+---
+Name: "SFML-Sidescroller"
+ProgramPath: "SFMLSidescrollerClient"
+AbsolutePath: "1"
+Parameters: ""
+Directory: "/var/piga/Games/SFML-Sidescroller"
+
+Description: "An original sidescrolling game (SHMUP)"
+Version: "1.0"
+Author: "maximaximal"
+Logo: "icon.ong"
+BackgroundImage: "chooser-background.png"
