@@ -1,7 +1,7 @@
 -- window resolution
 	WindowX = 800;
   WindowY = 500;
-	fullscreen = false;
+	fullscreen = true;
 -- debug mode
 	debug = {
 		active = false;
@@ -13,7 +13,7 @@
 -- 0 = Linux64;
 -- 1 = Linux32;
 -- 2 = Windows;
-	OS = 0;
+	OS = 1;
 -- extreme Mode (Sets the levelup-points from 200 to 20)
 	extremeMode = false;			--RESTRICTED
 -- Screensaver Mode
@@ -27,7 +27,7 @@
 -- Shoot Rate (Delay between a shot - in milliseconds)
 	shootRate = 150;			--RESTRICTED
 -- piga inputs (requires running piga host!)
-	pigaInputs = false
+	pigaInputs = true
 -- Start Laser
 -- 1 = RED
 -- 2 = BLUE
