@@ -2,7 +2,7 @@
 Name: "SFML-Sidescroller"
 ProgramPath: "SFMLSidescrollerClient"
 AbsolutePath: "1"
-Parameters: ""
+Parameters: "/var/sfml-sidescroller/"
 Directory: "/var/piga/Games/SFML-Sidescroller"
 
 Description: "An original sidescrolling game (SHMUP)"
