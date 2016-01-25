@@ -34,8 +34,8 @@ void CBackgroundMusic::update()
         }
         if(ls["usePlaylist"].value().asBoolean() && Status == 0 && CConfig::Get()->getGameState() != STATE_CREDITS)
         {
-            cout << "Now Playing: (Playlist): " << ls["tracks"][ls["playlist"][Playlist].value().asNumber()].value().asString() << endl;
-            music->openFromFile(ls["tracks"][ls["playlist"][Playlist].value().asNumber()].value().asString());
+            cout << "Now Playing: (Playlist): " << CConfig::Get()->getDataDir() << "/" << ls["tracks"][ls["playlist"][Playlist].value().asNumber()].value().asString() << endl;
+            music->openFromFile(CConfig::Get()->getDataDir() + "/" + ls["tracks"][ls["playlist"][Playlist].value().asNumber()].value().asString());
             Playlist++;
             if(Playlist > ls["playlistCount"].value().asNumber())
             Playlist = 1;
@@ -45,8 +45,8 @@ void CBackgroundMusic::update()
         if(!ls["usePlaylist"].value().asBoolean() && Status == 0 && CConfig::Get()->getGameState() != STATE_CREDITS)
         {
             int random = rand()%(int)ls["trackCount"].value().asNumber() + 1;
-            cout << "Now Playing (Random): " << ls["tracks"][random].value().asString() << endl;
-            music->openFromFile(ls["tracks"][random].value().asString());
+            cout << "Now Playing (Random): " << CConfig::Get()->getDataDir() << "/" << ls["tracks"][random].value().asString() << endl;
+            music->openFromFile(CConfig::Get()->getDataDir() + "/" + ls["tracks"][random].value().asString());
             music->play();
             CreditsSong = true;
         }
