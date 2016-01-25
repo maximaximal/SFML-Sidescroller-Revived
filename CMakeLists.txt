@@ -76,6 +76,7 @@ install(
 install(
     FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/Data/config.yml
+        ${CMAKE_CURRENT_SOURCE_DIR}/Data/PackageSpecs.yml
         ${CMAKE_CURRENT_SOURCE_DIR}/Data/icon.png
         ${CMAKE_CURRENT_SOURCE_DIR}/Data/chooser-background.png
     DESTINATION ../var/piga/Games/SFML-Sidescroller/)
