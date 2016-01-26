@@ -161,6 +161,7 @@ void CApp::onInit()
                     {
                         case piga::ACTION:
                             e.key.code = sf::Keyboard::Space;
+                            shoot = pigaEvent.gameInput.state();
                             break;
                         case piga::UP:
                             e.key.code = sf::Keyboard::W;
